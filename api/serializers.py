@@ -14,7 +14,7 @@ class CarSerializer(serializers.ModelSerializer):
 
     def get_average_rate(self, obj):
         rates = [item.rate for item in Rate.objects.filter(car=obj)]
-        average_rate = sum(rates) if rates else 0
+        average_rate = round(sum(rates) / len(rates), 2) if rates else 0
         return average_rate
     
     def create(self, validated_data):
