@@ -33,4 +33,4 @@ The reason of chosen technology is that they have good community support and off
 
 4. Run `docker-compose -f docker-compose.prod.yml exec web python manage.py migrate --no-input` to add migrations into database.
 
-5 Run `docker-compose -f docker-compose.prod.yml exec web python manage.py collectstatic` to add static files.
+5. Run `docker-compose -f docker-compose.prod.yml exec web python manage.py collectstatic` to add static files.
