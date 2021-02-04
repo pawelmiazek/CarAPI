@@ -21,6 +21,7 @@ class GetAllCarsTest(APITestCase):
 class CreateNewCarTest(APITestCase):
     
     def setUp(self):
+        Car.objects.create(make="HONDA", model="METROPOLITAN")
         self.valid_data = {
             'make': 'HONDA',
             'model': 'Civic'
@@ -32,6 +33,10 @@ class CreateNewCarTest(APITestCase):
         self.invalid_model = {
             'make': 'HONDA',
             'model': 'model'
+        }
+        self.not_unique_car = {
+            'make': 'HONDA',
+            'model': 'METROPOLITAn'
         }
         self.url = reverse('api:car-list-create')
     
@@ -45,6 +50,10 @@ class CreateNewCarTest(APITestCase):
 
     def test_create_invalid_model(self):
         response = self.client.post(self.url, self.invalid_model, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_create_not_unique_car(self):
+        response = self.client.post(self.url, self.not_unique_car, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
 

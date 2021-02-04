@@ -20,6 +20,9 @@ class CarSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         make_name = validated_data.get('make')
         model_name = validated_data.get('model')
+        for car in Car.objects.all():
+            if car.make.upper() == make_name.upper() and car.model.upper() == model_name.upper():
+                raise serializers.ValidationError("This car already exists.")
         r = requests.get(
             'https://vpic.nhtsa.dot.gov/api/vehicles/getallmakes?format=json'
         )
