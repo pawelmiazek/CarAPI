@@ -34,3 +34,7 @@ The reason of chosen technology is that they have good community support and off
 4. After build run `docker-compose -f docker-compose.prod.yml exec web python manage.py migrate --no-input` to add migrations into database.
 
 5. Run `docker-compose -f docker-compose.prod.yml exec web python manage.py collectstatic` to add static files.
+
+## Last Step
+
+API is available on `/api/`, e.g if you run it on `http://localhost:8000` it's `http://localhost:8000/api/`. 
